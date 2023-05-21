@@ -1,7 +1,7 @@
 {
   "name": "ecom",
   "version": "0.1.0",
-  "homepage": "https://jaydevkalariya.github.io/GoldenCakeshop",
+  "homepage": "https://jaydevkalariya.github.io",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.12.1",
