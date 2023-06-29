@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Button = styled.button`
   text-decoration: none;
   max-width: auto;
+  font-size:15px;
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+  font-size:12px;
+  }
   background-color: #ff187f;
   color: rgb(255 255 255);
   padding: 1.4rem 2.4rem;
@@ -14,9 +18,11 @@ export const Button = styled.button`
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
-
+  
   &:hover,
   &:active {
+    background-color:#ff187f;
+    color:white;
     box-shadow: 0 2rem 2rem 0 rgb(132 144 255 / 30%);
     box-shadow: ${({ theme }) => theme.colors.shadowSupport};
     transform: scale(0.96);

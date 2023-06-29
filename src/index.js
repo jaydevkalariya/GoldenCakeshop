@@ -6,29 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { AppProvider } from "./context/productcontex";
 import { FilterContextProvider } from "./context/filter_context";
 import { CartProvider } from "./context/cart_context";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { UserProvider } from "./context/user_context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <Auth0Provider
-  domain="dev-lkhr5byxei0qay80.us.auth0.com"
-  clientId="EKhhzlBVOR7SQB3xIcWJ8udYw5vxLuzJ"
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
-  >
+  
   <AppProvider>
+    <UserProvider>
     <FilterContextProvider>
       <CartProvider>
         <App />
       </CartProvider>
     </FilterContextProvider>
+    </UserProvider>
   </AppProvider>
-  </Auth0Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

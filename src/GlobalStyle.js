@@ -21,6 +21,7 @@ body {
   overflow-x: hidden;
    scrollbar-color: rgb(98 84 243);
     scrollbar-width: thin;
+    font-size:15px;
 }
 
 body::-webkit-scrollbar {
@@ -129,7 +130,7 @@ ${"" /* resuable code section  */}
       right: 10%;
       text-transform: uppercase;
       background-color: ${({ theme }) => theme.colors.bg};
-      color: ${({ theme }) => theme.colors.helper};
+      color: ${({ theme }) => theme.colors.black};
       padding: 0.8rem 2rem;
       font-size: 1.2rem;
       border-radius: 2rem;
@@ -140,7 +141,7 @@ input, textarea{
     color: ${({ theme }) => theme.colors.black};
     padding: 1.6rem 2.4rem;
     border: 1px solid ${({ theme }) => theme.colors.border};
-    text-transform: uppercase;
+    
    box-shadow: ${({ theme }) => theme.colors.shadowSupport};
 }
     input[type="submit"]{

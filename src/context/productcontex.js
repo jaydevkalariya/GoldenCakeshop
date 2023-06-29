@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import reducer from "../reducer/productReducer";
-import Cakes from "../api";
+import axios from 'axios';
+import { URI } from "../App";
+
 
 const AppContext = createContext();
 
@@ -9,7 +11,7 @@ const initialState = {
   isError: false,
   products: [],
   featureProducts: [],
-  singleProduct:{}
+  singleProduct: {}
 };
 
 const AppProvider = ({ children }) => {
@@ -19,7 +21,7 @@ const AppProvider = ({ children }) => {
 
     dispatch({ type: "SET_LOADING" });
     try {
-     
+
       const products = await data;
       dispatch({ type: "SET_API_DATA", payload: products });
     } catch (error) {
@@ -27,11 +29,11 @@ const AppProvider = ({ children }) => {
     }
   };
   const getSingleProduct = async (data) => {
-   
+
     dispatch({ type: "SET_LOADING" });
     try {
-     
-      const singleProduct = await data[0];
+
+      const singleProduct = await data;
       dispatch({ type: "SINGLEPAGE_SET_API_DATA", payload: singleProduct });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
@@ -39,11 +41,19 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getProducts(Cakes);
+    axios.get(`${URI}/cakes/allcakes`)
+      .then(response => {
+        getProducts(response.data);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
+      });
+     
   }, []);
 
   return (
-    <AppContext.Provider value={{ ...state,getSingleProduct }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, getSingleProduct }}>{children}</AppContext.Provider>
   );
 };
 

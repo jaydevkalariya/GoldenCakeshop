@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 
-const GridView = ({ products }) => {
+const GridView = (props) => {
   return (
     <Wrapper className="section">
       <div className="container grid grid-three-column">
-        {products.map((curElem) => {
-          return <Product key={curElem.id} {...curElem} />;
+        {props.products.map((curElem,idx) => {
+          return <Product key={idx} curElem={curElem} setRequestData={props.setRequestData} />;
         })}
       </div>
     </Wrapper>
@@ -18,6 +18,7 @@ const Wrapper = styled.section`
   padding: 9rem 2rem;
   margin:2rem 0;
   box-shadow:3px 3px 3px 3px lightgrey;
+
   .container {
     max-width: 120rem;
   }
@@ -27,6 +28,7 @@ const Wrapper = styled.section`
   }
 
   figure {
+    font-weight:bold;
     width: auto;
     display: flex;
     justify-content: center;
@@ -59,6 +61,14 @@ const Wrapper = styled.section`
     }
   }
 
+  .dltbutton{
+    border:none;
+    color:red;
+
+    &:hover {
+      transform:scale(1.2);
+    }
+  }
   .card {
     background-color: ${({ theme }) => theme.colors.bg};
     border-radius: 1rem;
@@ -75,12 +85,14 @@ const Wrapper = styled.section`
     }
 
     .card-data--price {
-      color: ${({ theme }) => theme.colors.helper};
+      color: black;
+      font-weight:bold;
     }
 
     h3 {
       color: ${({ theme }) => theme.colors.text};
       text-transform: capitalize;
+      font-weight:bold;
     }
 
     .btn {

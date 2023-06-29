@@ -3,10 +3,11 @@ import { useFilterContext } from "../context/filter_context";
 import { FaCheck } from "react-icons/fa";
 import FormatPrice from "../Helpers/FormatPrice";
 import { Button } from "../styles/Button";
+import { useState,useEffect } from "react";
 
 const FilterSection = () => {
   const {
-    filters: { text, category, flavour, price, maxPrice, minPrice },
+    filters: { text, category, price, maxPrice, minPrice },
         updateFilterValue,
         all_products,
         clearFilters,
@@ -14,26 +15,26 @@ const FilterSection = () => {
 
   // get the unique values of each property
   const getUniqueData = (data, attr) => {
-    let newVal = data.map((curElem) => {
-      return curElem[attr];
+    let newVal;
+    if(attr==="category"){
+     newVal = data.map((curElem) => {
+      return (curElem.category+"").toLowerCase()
     });
-
-    if (attr === "flavours") {
-      // return (newVal = ["All", ...new Set([].concat(...newVal))]);
-      newVal = newVal.flat();
+    return newVal=["all",...new Set(newVal)];
     }
-
-    return (newVal = ["all", ...new Set(newVal)]);
+    else{
+      newVal = data.flatMap((curElem) => {
+        return (curElem.flavours)});
+      newVal= newVal.map((cake)=>cake.toLowerCase())
+    return newVal=["all",...new Set(newVal)];
+   }
   };
+ 
 
   // we need to have the individual data of each in an array format
   const categoryData = getUniqueData(all_products, "category");
   const flavoursData = getUniqueData(all_products, "flavours");
-  // console.log(
-  //   "🚀 ~ file: FilterSection.js ~ line 23 ~ FilterSection ~ companyData",
-  //   colorsData
-  // );
-
+  
   return (
     <Wrapper>
       <div className="filter-search">
@@ -70,12 +71,15 @@ const FilterSection = () => {
       <div className="filter-flavour">
         <h3>Flavours:</h3>
 
-        <form action="#">
+        
           <select
             name="flavour"
             id="flavour"
             className="filter-flavour--select"
-            onClick={updateFilterValue}>
+            onClick={updateFilterValue}
+              onChange={updateFilterValue }
+              onBlur={updateFilterValue}
+              >
             {flavoursData.map((curElem, index) => {
               return (
                 <option key={index} value={curElem} name="flavour">
@@ -84,7 +88,7 @@ const FilterSection = () => {
               );
             })}
           </select>
-        </form>
+
       </div>
 
       <div className="filter_price">
@@ -152,6 +156,7 @@ const Wrapper = styled.section`
       .active {
         border-bottom: 1px solid #000;
         color: ${({ theme }) => theme.colors.btn};
+        outline: none;
       }
     }
   }

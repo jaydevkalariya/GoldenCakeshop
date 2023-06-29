@@ -1,25 +1,45 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {useProductContext } from "../context/productcontex"
-const Product = (curElem) => {
+import axios from 'axios';
+import { URI } from '../App';
+import { toast } from "react-toastify";
+import {  useUserContext } from "../context/user_context";
 
-  const { id, name, image, price, category } = curElem;
+const Product = ({curElem,setRequestData="default"}) => {
+  const {isAdmin}=useUserContext();
+  const deletecake=async(id)=>{
+    await axios.post(`${URI}/cakes/deletecake`,{
+      id:id
+    })
+    .then(response => {
+       setRequestData(new Date());
+      toast.success("Deleted succesfully");
+   })
+   .catch(error => {
+     toast.error(error);
+   });
+  }
+  const { _id, name, image, price, category } = curElem;
   return (
-    <NavLink to={`/singleproduct/${id}`}>
+    
       <div className="card">
+        <NavLink to={`/singleproduct/${_id}`}>
         <figure>
-          <img src={image} alt={name} />
-          <figcaption className="caption">{category}</figcaption>
+          <img src={image[0]} alt={name} />
+          <figcaption className="caption" style={{marginTop:"-1rem", backgroundColor:"#8B0000",color:"white" }}>{category}</figcaption>
         </figure>
-
+        </NavLink>
         <div className="card-data">
           <div className="card-data-flex">
             <h3>{name}</h3>
             <p className="card-data--price">{price}</p>
-          </div>
+            {isAdmin? 
+           <button className="dltbutton" onClick={()=>deletecake(_id)}><i class="material-icons" style={{fontSize:"25px"}}>delete</i></button>
+            :''}
+           </div>
         </div>
       </div>
-    </NavLink>
+    
   );
 };
 

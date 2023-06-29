@@ -25,8 +25,6 @@ const filterReducer = (state, action) => {
       };
 
     case "GET_SORT_VALUE":
-      // let userSortValue = document.getElementById("sort");
-      // let sort_value = userSortValue.options[userSortValue.selectedIndex].value;
       return {
         ...state,
         sorting_value: action.payload,
@@ -34,7 +32,6 @@ const filterReducer = (state, action) => {
 
     case "SORTING_PRODUCTS":
       let newSortData;
-      // let tempSortProduct = [...action.payload];
 
       const { filter_products, sorting_value } = state;
       let tempSortProduct = [...filter_products];
@@ -84,24 +81,25 @@ const filterReducer = (state, action) => {
       if (text) {
        
         tempFilterProduct = tempFilterProduct.filter((curElem) => {
-          return curElem.name.toLowerCase().includes(text);
+          return curElem.name.toLowerCase().includes(text.toLowerCase());
         });
       }
 
       if (category !== "all") {
         tempFilterProduct = tempFilterProduct.filter(
-          (curElem) => curElem.category === category
+          (curElem) =>
+           curElem.category.toLowerCase() === category.toLowerCase() 
         );
       }
 
       if (flavour !=="all") {
         tempFilterProduct = tempFilterProduct.filter((curElem) =>
-          curElem.flavours.includes(flavour)
+          (curElem.flavours+"").toLowerCase().includes(flavour.toLowerCase())
         );
       }
       if (price === 0) {
         tempFilterProduct = tempFilterProduct.filter(
-          (curElem) => curElem.price == price
+          (curElem) => curElem.price === price
         );
       } else {
         tempFilterProduct = tempFilterProduct.filter(

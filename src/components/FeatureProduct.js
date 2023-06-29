@@ -12,11 +12,10 @@ const FeatureProduct = () => {
   return (
     <Wrapper className="section">
       <div className="container" id="feature">
-        <div className="intro-data" >Check Now!</div>
         <div className="common-heading">Delicious Cakes:</div>
         <div className="grid grid-three-column">
           {featureProducts.map((curElem) => {
-            return <Product key={curElem.id} {...curElem} />;
+            return <Product key={curElem.id} curElem={curElem} />;
           })}
         </div>
       </div>
@@ -70,10 +69,11 @@ const Wrapper = styled.section`
       right: 10%;
       text-transform: uppercase;
       background-color: ${({ theme }) => theme.colors.bg};
-      color: ${({ theme }) => theme.colors.helper};
+      color: black;
       padding: 0.8rem 2rem;
       font-size: 1.2rem;
       border-radius: 2rem;
+      font-weight:bold;
     }
   }
 
@@ -95,10 +95,12 @@ const Wrapper = styled.section`
     h3 {
       color: ${({ theme }) => theme.colors.text};
       text-transform: capitalize;
+      font-weight:bold;
     }
 
     .card-data--price {
-      color: ${({ theme }) => theme.colors.helper};
+      color: black;
+      font-weight:bold;
     }
 
     .btn {

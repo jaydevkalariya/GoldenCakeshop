@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useProductContext } from "./context/productcontex";
@@ -7,17 +7,19 @@ import { Container } from "./styles/Container";
 import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/star"
-import Cake from "./api";
 import AddToCart from "./components/AddToCart";
+import axios from "axios";
+import { URI } from "./App";
+import ImageSlider from './ImageSlider';
 
 
 
 
 
 const SingleProduct = () => {
-  const { getSingleProduct, isLoading, singleProduct } =useProductContext();
+  const { getSingleProduct, isLoading, singleProduct } = useProductContext();
   const { id } = useParams();
-  let x=  Math.random()
+  let x = Math.random()
   const {
     id: alias,
     name,
@@ -25,20 +27,20 @@ const SingleProduct = () => {
     description,
     category,
     stars,
-    reviews,
     image,
-    flavours,
-    weight
   } = singleProduct;
- 
+
   useEffect(() => {
-    getSingleProduct(Cake.filter((curr)=>{
-        return curr.id===id;
-    }));
+
+    axios.get(`${URI}/cakes/${id}`)
+      .then(response => {
+        const cake = response.data;
+        getSingleProduct(cake);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }, []);
-
-  
-
 
 
   if (isLoading) {
@@ -46,63 +48,65 @@ const SingleProduct = () => {
   }
 
 
-
   return (
     <Wrapper>
-      
+
       <PageNavigation title={name} />
       <Container className="container">
         <div className="grid grid-two-column">
-          {/* product Images  */}
+         
           <div className="product_images">
-            <img src={image} width="100%" height="70%"/>
+            <ImageSlider images={image} />
 
-           <div className="delivery_details">
-            <h3 style={{fontWeight:"bold"}}>Delivery Details & Instructions :</h3>
-           <ol>
-            <li>The delicious cake is hand-delivered by our delivery boy in a good quality cardboard box.</li>
-            <li>Candle and knife will be delivered as per the availability</li>
-            <li>After receiving, Please do not squeeze the sides of the box</li>
-            <li>Please keep it cool and away from direct sunlight</li>
-            <li>Immediately cover any leftover cake and refrigerate it</li>
-           </ol>
-           </div>
-      
+
+            <div className="delivery_details">
+              <h3 style={{ fontWeight: "bold" }}>Delivery Details & Instructions :</h3>
+              <ul>
+                <li>1) The delicious cake is hand-delivered by our delivery boy in a good quality cardboard box.</li>
+                <li>2) Candle and knife will be delivered as per the availability.</li>
+                <li>3) After receiving, Please do not squeeze the sides of the box.</li>
+                <li>4) Please keep it cool and away from direct sunlight.</li>
+                <li>5) Immediately cover any leftover cake and refrigerate it.</li>
+              </ul>
+            </div>
+
           </div>
 
-          {/* product dAta  */}
-          <div className="product-data" style={{boxShadow:"5px 5px 5px 5px lightgrey"}}>
+          {/* product data  */}
+          <div className="product-data" style={{ boxShadow: "5px 5px 5px 5px lightgrey" }}>
             <h2>{name}</h2>
             <h3>{category} Cake</h3>
-            <p><Star stars={stars} reviews={reviews}/></p>
+            <p><Star stars={stars} /></p>
             <p className="product-data-price">
-             
-              Price: {(Math.round(price + ((price *x * (9))/100))) - ((Math.round(price + ((price * x * (9))/100)))%10)}
+
+              Price: {(Math.round(price + ((price * x * (9)) / 100))) - ((Math.round(price + ((price * x * (9)) / 100))) % 10)}
             </p>
             <p className="product-data-price product-data-real-price">
               Deal of the Day: {price}
             </p>
-             <p style={{fontWeight:"bold"}}> Product Highlights: </p>
-            <pre style={{fontSize:"1.4rem",marginTop:"-2rem"}}>{description}</pre>
+            <p style={{ fontWeight: "bold" }}> Product Highlights:
+              <pre style={{ fontFamily: "sans-serif", fontWeight: "normal" }} >{description}</pre>
+            </p>
+
             <div className="product-data-warranty">
               <div className="product-warranty-data">
                 <TbTruckDelivery className="warranty-icon" />
-                <p>Fast Delivery</p>
+                <p className="services">Fast Delivery</p>
               </div>
 
               <div className="product-warranty-data">
                 <TbReplace className="warranty-icon" />
-                <p>Fresh & spongy</p>
+                <p className="services">Fresh & spongy</p>
               </div>
 
               <div className="product-warranty-data">
                 <TbTruckDelivery className="warranty-icon" />
-                <p>Golden Delivered </p>
+                <p className="services">Golden Delivered </p>
               </div>
 
               <div className="product-warranty-data">
                 <MdSecurity className="warranty-icon" />
-                <p>2 days freshness </p>
+                <p className="services">2 days freshness </p>
               </div>
             </div>
 
@@ -111,8 +115,8 @@ const SingleProduct = () => {
                 Available:
                 <span> In Stock</span>
               </p>
-              </div>
-             <AddToCart product={singleProduct} />
+            </div>
+            <AddToCart product={singleProduct} />
           </div>
         </div>
       </Container>
@@ -120,7 +124,14 @@ const SingleProduct = () => {
   );
 };
 
+
+
 const Wrapper = styled.section`
+
+ 
+
+
+
  .delivery_details{
   margin-top:2rem;
   font-size:1.7rem;
@@ -188,19 +199,37 @@ const Wrapper = styled.section`
       color: red;
     }
   }
-  .product-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:200px;
-  }
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    padding: 0 2.4rem;
-  }
-  @media (max-width: 400px) {
-    padding: 0 2.4rem;
+  
+  
+  @media screen and (max-width: 402px) and (min-width:374px)  {
+    margin:0 1rem ;
     .product-data{
-       margin-top:5rem;
+       margin-top:10rem;
+       width:95%;
+       margin-left:0;
+    }
+    
+    .images{
+       height:70%;
+       width:95%;
+    }
+    .services{
+      margin:0 2rem;
+    }
+    .delivery_details{
+      margin:0 1rem;
+      margin-top:2rem;
+    }
+  }
+  @media screen and (max-width: 500px) and (min-width:403px)  {
+    margin:0 1rem ;
+   
+    .services{
+      margin:0 2rem;
+    }
+    .delivery_details{
+      margin:0 1rem;
+      margin-top:2rem;
     }
   }
 `;

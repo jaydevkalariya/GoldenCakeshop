@@ -1,33 +1,54 @@
 import styled from "styled-components";
 import { useCartContext } from "./context/cart_context";
 import CartItem from "./components/CartItem";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { Button } from "./styles/Button";
 import FormatPrice from "./Helpers/FormatPrice";
-
+import { useUserContext } from './context/user_context';
+import {  toast } from 'react-toastify';
 
 const Cart = () => {
+  const navigate=useNavigate();
   const { cart, clearCart, total_price, shipping_fee } = useCartContext();
-  // console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
+
+  const { user,isAuthenticated } = useUserContext();
+  
+ 
+  
+  const placeOrder=()=>{
+      if(isAuthenticated)
+      {
+           navigate('/order');
+      }
+      else{
+          navigate("/login");
+          toast.info("Login first to place order");
+      }
+  }
+
   if ( cart.length === 0) {
     return (
       <EmptyDiv>
+        <h4>Welcome {isAuthenticated? user?.email : " User, Login first"}</h4>
+        <hr />
         <h3>No Cart in Item </h3>
       </EmptyDiv>
     );
   }
   return (
     <Wrapper>
+      <h3 style={{fontWeight:"bold",textAlign:"center",marginBottom:"2rem",fontSize:"20px"}}>Welcome {isAuthenticated? user?.email : " User, Login first"}</h3>
+      <hr />
       <div className="container">
         <div className="cart_heading grid grid-five-column">
-          <p>Item</p>
-          <p className="cart-hide">Price</p>
-          <p>Quantity</p>
-          <p className="cart-hide">Subtotal</p>
-          <p>Remove</p>
+          <p style={{fontWeight:"bold"}}>Item</p>
+          <p className="cart-hide" style={{fontWeight:"bold"}}>Price</p>
+          <p style={{fontWeight:"bold"}}>Quantity</p>
+          <p className="cart-hide" style={{fontWeight:"bold"}}>Subtotal</p>
+          <p style={{fontWeight:"bold"}}>Remove</p>
         </div>
         <hr />
-
+    
         <div className="cart-item">
           {cart.map((curElem) => {
             return <CartItem key={curElem.id} {...curElem} />;
@@ -39,11 +60,10 @@ const Cart = () => {
           <NavLink to="/products">
             <Button> continue Shopping </Button>
           </NavLink>
-          <Button className="btn btn-clear" onClick={clearCart}>
+          <Button className="btn-clear" onClick={clearCart}>
             clear cart
           </Button>
         </div>
-        {/* order total_amount */}
         <div className="order-total--amount">
           <div className="order-total--subdata">
             <div>
@@ -66,6 +86,7 @@ const Cart = () => {
               </p>
             </div>
           </div>
+          <Button onClick={placeOrder}>Proceed to checkout</Button>
         </div>
       </div>
     </Wrapper>
@@ -84,6 +105,27 @@ const EmptyDiv = styled.div`
 `;
 const Wrapper = styled.section`
   padding: 9rem 0;
+
+
+  .carthead{
+    padding:2rem 0;
+    border:3px solid purple;
+  }
+  .customize{
+    //  background-color:lightgrey;
+    background: linear-gradient(
+      to right,  
+      #a53e76 0%, 
+      #d24787 15%, 
+      #e44b8d 25%,
+      #e2619f 30%,
+      #e27bb1 50%,
+      #eec4dc 100%
+    );
+    .tt{
+      color:white;
+    }
+  }
 
   .grid-four-column {
     grid-template-columns: repeat(4, 1fr);
@@ -171,7 +213,6 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2.4rem;
     font-size: 1.4rem;
 
     button {
@@ -242,8 +283,8 @@ const Wrapper = styled.section`
     .order-total--amount {
       width: 100%;
       text-transform: capitalize;
-      justify-content: flex-start;
-      align-items: flex-start;
+      justify-content: center;
+      align-items: center;
 
       .order-total--subdata {
         width: 100%;

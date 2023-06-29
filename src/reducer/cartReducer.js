@@ -1,6 +1,6 @@
 const cartReducer = (state, action) => {
     if (action.type === "ADD_TO_CART") {
-      let { id, flavour,wt, amount, product } = action.payload;
+      let { id, flavour,wt, amount,bname, product,customize,detail } = action.payload;
         // tackle the existing product
     let existingProduct = state.cart.find(
       (curItem) => curItem.id ==   id + flavour + wt,
@@ -32,6 +32,10 @@ const cartReducer = (state, action) => {
         flavour,
         wt,
         amount,
+        bname,
+        customize,
+        detail,
+        isConfirmed:false,
         image: product.image,
         price: product.category!=="pestry"? product.price * wt: product.price,
         max: product.stock,
@@ -44,8 +48,10 @@ const cartReducer = (state, action) => {
   }
   // to set the increment and decrement
   if (action.type === "SET_DECREMENT") {
+    
     let updatedProduct = state.cart.map((curElem) => {
       if (curElem.id === action.payload) {
+        
         let decAmount = curElem.amount - 1;
         if (decAmount <= 1) {
           decAmount = 1;
@@ -64,9 +70,7 @@ const cartReducer = (state, action) => {
     let updatedProduct = state.cart.map((curElem) => {
       if (curElem.id === action.payload) {
         let incAmount = curElem.amount + 1;
-        if (incAmount >= curElem.max) {
-          incAmount = curElem.max;
-        }
+       
         return {
           ...curElem,
           amount: incAmount,

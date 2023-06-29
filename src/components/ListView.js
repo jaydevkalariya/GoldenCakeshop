@@ -8,11 +8,11 @@ const ListView = ({ products }) => {
     <Wrapper className="section">
       <div className="container grid">
         {products.map((curElem) => {
-          const { id, name, image, price, description } = curElem;
+          const { _id, name, image, price } = curElem;
           return (
             <div className="card grid grid-two-column">
               <figure>
-                <img src={image} alt={name} />
+                <img src={image[0]} alt={name} />
               </figure>
 
               <div className="card-data">
@@ -20,9 +20,8 @@ const ListView = ({ products }) => {
                 <p>
                   <FormatPrice price={price} />
                 </p>
-                <p>{description.slice(0, 90)}...</p>
 
-                <NavLink to={`/singleproduct/${id}`} className="btn-main">
+                <NavLink to={`/singleproduct/${_id}`} className="btn-main">
                   <Button className="btn">Read More</Button>
                 </NavLink>
               </div>
@@ -94,16 +93,13 @@ const Wrapper = styled.section`
 
     .btn {
       margin: 2rem 0;
-      background-color: rgb(0 0 0 / 0%);
+      background-color: ${({ theme }) => theme.colors.helper};
       border: 0.1rem solid rgb(98 84 243);
       display: flex;
       justify-content: center;
       align-items: center;
-      color: rgb(98 84 243);
+      color: white;
 
-      &:hover {
-        background-color: rgb(98 84 243);
-      }
 
       &:hover a {
         color: #fff;

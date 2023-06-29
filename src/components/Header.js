@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <MainHeader>
       <NavLink to="/">
-        <img src="./images/logo.png" alt="my logo img" height="80rem" width="200rem" style={{borderRadius:"20%"}} />
+        <img src="../images/logo.png" alt="my logo img" height="80rem" width="200rem" style={{borderRadius:"20%"}} />
       </NavLink>
       <Nav />
     </MainHeader>

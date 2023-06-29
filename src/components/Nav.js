@@ -4,12 +4,11 @@ import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "../styles/Button";
+import { useUserContext } from "../context/user_context";
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
-  const { loginWithRedirect,logout,isAuthenticated } = useAuth0();
   const { total_item } = useCartContext();
+  const { logout,isAuthenticated,isAdmin } = useUserContext();
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -87,7 +86,8 @@ const Nav = () => {
         display: none;
         font-size: 4.2rem;
         position: absolute;
-        top: 30%;
+        margin-top:-20px;
+        margin-right:5px;
         right: 10%;
         color: ${({ theme }) => theme.colors.black};
         z-index: 9999;
@@ -101,7 +101,7 @@ const Nav = () => {
         position: absolute;
         top: 0;
         left: 0;
-        background-color: #fff;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -109,19 +109,21 @@ const Nav = () => {
         visibility: hidden;
         opacity: 0;
         transform: translateX(100%);
-        /* transform-origin: top; */
+        //  transform-origin: top; 
         transition: all 3s linear;
       }
       .active .navbar-lists {
-        visibility: visible;
-        opacity: 1;
-        transform: translateX(0);
-        z-index: 999;
-        transform-origin: right;
-        transition: all 3s linear;
+          visibility: visible;
+          opacity: 1;
+          transform: translateX(0);
+          z-index: 999;
+         transform-origin: right;
+         transition: all 1s linear;
         .navbar-link {
-          font-size: 4.2rem;
+          font-size: 2.5rem;
         }
+       margin-left:-91vw;
+       margin-top:-4rem;
       }
       .cart-trolley--link {
         position: relative;
@@ -148,6 +150,16 @@ const Nav = () => {
     <Nav>
       <div className={menuIcon ? "navbar active" : "navbar"}>
         <ul className="navbar-lists">
+        {isAuthenticated && isAdmin?
+        <li>
+            <NavLink
+              to="/admin"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}>
+               AdminPanel
+            </NavLink>
+          </li>
+           :""}
           <li>
             <NavLink
               to="/"
@@ -174,27 +186,60 @@ const Nav = () => {
           </li>
           <li>
             <NavLink
+              to="/customizecake"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}>
+              Customize-Cake
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/contact"
               className="navbar-link "
               onClick={() => setMenuIcon(false)}>
               Contact
             </NavLink>
           </li>
-          { isAuthenticated?
+          {!isAuthenticated?
+          <>
           <li>
-          
-          <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-              Log Out
-          </Button>
+            <NavLink
+              to="/register"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}
+              >
+               Register
+            </NavLink>
           </li>
-              : 
-              <li>
-              <Button onClick={() => loginWithRedirect()}>Log In</Button>
+          <li>
+            <NavLink
+              to="/login"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}
+              >
+              Login
+            </NavLink>
           </li>
-}
+          </>
+           :
+          <li>
+            <NavLink
+              to="/"
+              className="navbar-link "
+              onClick={()=>{
+                logout();
+                setMenuIcon(false);
+              }}
+              >
+              Logout
+            </NavLink>
+          </li>
+           }
          
           <li>
-            <NavLink to="/cart" className="navbar-link cart-trolley--link">
+            <NavLink to="/cart" className="navbar-link cart-trolley--link" onClick={()=>{
+                setMenuIcon(false);
+              }}>
               <FiShoppingCart className="cart-trolley" />
               <span className="cart-total--item"> {total_item} </span>
             </NavLink>

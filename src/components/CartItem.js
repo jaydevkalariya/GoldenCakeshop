@@ -1,36 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import FormatPrice from "../Helpers/FormatPrice";
 import CartAmountToggle from "./CartAmountToggle";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 
-const CartItem = ({ id, name, image, flavour,wt, price, amount }) => {
+const CartItem = ({ id, image, flavour,wt, price, amount,bname,customize }) => {
  
  const { removeItem, setDecrease, setIncrement } = useCartContext();
-  
-
+ console.log(image)
   return (
-    <div className="cart_heading grid grid-five-column">
+    <div className={customize?"carthead grid grid-five-column customize":"carthead grid grid-five-column"}>
       <div className="cart-image--name">
         <div>
           <figure>
-            <img src={image} alt={id} />
+            <img src={image[0]} alt={id} />
           </figure>
         </div>
-        <div>
-          <p>{name}</p>
+        <div style={{height:"60px",overflowY: "auto",boxShadow:"2px 2px 2px 2px lightgrey",color:"white"}}>
           <div className="flavour-div">
-            <p>flavour:  {flavour}</p>  
+            <p className="tt"><b>flavour:</b>  {flavour}</p>  
           </div>
+          <hr />
           <div className="flavour-div">
-            <p>Weight:  {wt}</p>  
+            <p className="tt"><b>Weight:</b>  {wt}</p>  
+          </div>
+          <hr />
+          <div className="flavour-div">
+            <p className="tt"><b>Name on Cake:</b>  {bname}</p>  
           </div>
         </div>
       </div>
       {/* price   */}
       <div className="cart-hide">
-        <p>
+        <p className="tt">
+        {!customize?
           <FormatPrice price={price} />
+          :
+          "Cash On delivery"
+          }
         </p>
       </div>
 
@@ -44,7 +51,11 @@ const CartItem = ({ id, name, image, flavour,wt, price, amount }) => {
       {/* //Subtotal */}
       <div className="cart-hide">
         <p>
+          {!customize?
           <FormatPrice price={price * amount} />
+          :
+          "Cash On delivery"
+          }
         </p>
       </div>
 

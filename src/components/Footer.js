@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
           </div>
         </section>
-        {/* footer section */}
+       
 
         <footer>
           <div className="container grid grid-four-column">
@@ -48,12 +48,17 @@ const Footer = () => {
                   <FaDiscord className="icons" />
                 </div>
                 <div>
-                  <FaInstagram className="icons" />
+                <a
+                    href="https://www.instagram.com/goldencakeshop00/"
+                    target="_blank">
+                    <FaInstagram className="icons" />
+                  </a>
+                  
                 </div>
                 <div>
                   <a
-                    href="https://www.youtube.com/channel/UCwfaAHy4zQUb2APNOGXUCCA"
-                    target="_blank">
+                    href="#"
+                   >
                     <FaYoutube className="icons" />
                   </a>
                 </div>

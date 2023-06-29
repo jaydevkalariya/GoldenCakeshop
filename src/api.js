@@ -5,10 +5,10 @@ const Cakes=[
         "price": 700,
         "flavours": ["Strawberry", "Pinepalle", "Chocolate"],
         "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-        "image": "../images/chocolate_birthday.avif",
+        "image": "../images/chocolate_birthday.jpg",
         "description": `                Category: Birthday
-                Flavours: "Strawberry", "Pinepalle", "Chocolate"
-                Shape: Round`,
+                Shape: Round
+                Free: knife & candles`,
         "category": "Birthday",
          "featured": false,
          "stars":4.5,
@@ -20,10 +20,10 @@ const Cakes=[
         "price": 600,
         "flavours": ["Strawberry", "Pinepalle", "Chocolate"],
         "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-         "image": "../images/gems.avif",
-          "description": `                Category: Birthday
-                Flavours: "Strawberry", "Pinepalle", "Chocolate"
-                Shape: Round`,
+         "image": "../images/gems.jpg",
+          "description": `               Category: Birthday
+                Shape: Round,
+                Free: knife & candles`,
            "category": "Birthday",
          "featured": true,
          "stars":4.5,
@@ -33,12 +33,12 @@ const Cakes=[
         "id": "id3",
         "name": "BlackForest Cake",
         "price": 650,
-        "flavours": ["blackforest", "chocolate", "french-chocolate","dark-chocolate"],
+        "flavours": ["blackforest", "Chocolate", "french-chocolate","dark-chocolate"],
         "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
          "image": "../images/blackforest.jpg",
          "description": `                Category: Birthday
-                Flavours: "blackforest", "chocolate", "french-chocolate","dark-chocolate"
-                Shape: Heart`,
+                Shape: Heart,
+                Free: knife & candles`,
            "category": "Birthday",
          "featured": false,
          "stars":4.5,
@@ -48,12 +48,12 @@ const Cakes=[
         "id": "id4",
         "name": "Chocolate Cake",
         "price": 690,
-        "flavours": ["blackforest", "chocolate", "french-chocolate","dark-chocolate"],
+        "flavours": ["blackforest", "Chocolate", "french-chocolate","dark-chocolate"],
         "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-         "image": "../images/blueberry.webp",
+         "image": "../images/blueberry.jpg",
          "description": `                Category: Birthday
-         Flavours: "blackforest", "chocolate", "french-chocolate","dark-chocolate"
-         Shape: Round`,
+                Shape: Round,
+                Free: knife & candles`,
            "category": "Birthday",
          "featured": false,
          "stars":4.5,
@@ -65,10 +65,10 @@ const Cakes=[
       "price": 50,
       "flavours": ["Chocolate","french chocolate"],
       "weight":[0.2],
-       "image": "../images/chocolate_pestry.avif",
+       "image": "../images/chocolate_pestry.jpg",
        "description": `                Category: pestry
-                Flavours: "Chocolate","french chocolate"
-                Shape: Rectangle`,
+                Shape: Rectangle,
+                Free: knife & candles`,
          "category": "pestry",
        "featured": false,
        "stars":4.5,
@@ -78,12 +78,12 @@ const Cakes=[
     "id": "id6",
     "name": "Strawberry Pestry",
     "price": 50,
-    "flavours": ["strawberry"],
+    "flavours": ["Strawberry"],
     "weight":[0.2],
      "image": "../images/redvelvet_pestry.jpg",
      "description": `                Category: pestry
-                Flavours: "strawberry"
-                Shape: Triangle`,
+                Shape: Triangle
+                Free: knife & candles`,
        "category": "pestry",
      "featured": true,
      "stars":4.5,
@@ -93,12 +93,12 @@ const Cakes=[
   "id": "id7",
   "name": "Cartoon Cake (Doremon)",
   "price": 750,
-  "flavours": ["Chocolate","french chocolate","pinepalle"],
+  "flavours": ["Chocolate","french chocolate","Pinepalle"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/cartoon3.jpeg",
+   "image": "../images/cartoon3.jpg",
    "description": `                Category: cartoon
-                Flavours: "Chocolate","french chocolate","pinepalle"
-                Shape: Round`,
+                Shape: Round
+                Free: knife & candles`,
      "category": "cartoon",
    "featured": false,
    "stars":4.0,
@@ -108,12 +108,12 @@ const Cakes=[
   "id": "id8",
   "name": "Cartoon Cake (sinchen)",
   "price": 750,
-  "flavours": ["Chocolate","french chocolate","strawberry","blueberry"],
+  "flavours": ["Chocolate","french chocolate","Strawberry","blueberry"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/cartoon.webp",
+   "image": "../images/cartoon.jpg",
    "description": `                Category: cartoon
-                Flavours: "Chocolate","french chocolate","strawberry","blueberry"
-                Shape: Round`,
+                Shape: Round
+                Free: knife & candles`,
      "category": "cartoon",
    "featured":false,
    "stars":4.5,
@@ -125,10 +125,10 @@ const Cakes=[
   "price": 750,
   "flavours": ["Chocolate","Red-velvet"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/cartoon.jfif",
+   "image": "../images/cartoon.jfif.jpg",
    "description": `                Category: cartoon
-                Flavours: "Chocolate","Red-velvet"
-                Shape: Round`,
+                Shape: Round
+                Free: knife & candles`,
      "category": "cartoon",
    "featured": false,
    "stars":4.5,
@@ -138,12 +138,12 @@ const Cakes=[
   "id": "id10",
   "name": "Pinepalle Pestry",
   "price": 50,
-  "flavours": ["pinepalle","Chocolate"],
+  "flavours": ["Pinepalle","Chocolate"],
   "weight":[0.2],
-   "image": "../images/pinepalle_pestry.jfif",
+   "image": "../images/pinepalle_pestry.jfif.jpg",
    "description": `                Category: pestry
-                Flavours: "pinepalle","Chocolate"
-                Shape: Triangle`,
+                Shape: Triangle
+                Free: knife & candles`,
      "category": "pestry",
    "featured": false,
    "stars":4.5,
@@ -153,12 +153,12 @@ const Cakes=[
   "id": "id11",
   "name": "Fruit Cake",
   "price": 830,
-  "flavours": ["pinepalle","Chocolate","french chocolate","strwaberry","blueberry","casatta"],
+  "flavours": ["Pinepalle","Chocolate","french chocolate","Strawberry","blueberry","casatta"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
    "image": "../images/pinepalle_fruit.jpg",
    "description": `                Category: fruit cakes
-                Flavours: "pinepalle","Chocolate","french chocolate","strwaberry","blueberry","casatta"
-                Shape: Triangle`,
+                Shape: Triangle
+                Free: knife & candles`,
      "category": "fruit",
    "featured": false,
    "stars":2,
@@ -170,10 +170,10 @@ const Cakes=[
   "price": 650,
   "flavours": ["Chocolate","french chocolate","blueberry"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/anniversary.avif",
+   "image": "../images/anniversary.jpg",
    "description": `                Category: Anniversary
-                Flavours: "Chocolate","french chocolate","blueberry"
-                Shape: Heart`,
+                Shape: Heart
+                Free: knife & candles`,
      "category": "Anniversary",
    "featured": true,
    "stars":4.5,
@@ -200,7 +200,7 @@ const Cakes=[
   "price": 720,
   "flavours": ["Chocolate","french chocolate"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/photo.jfif",
+   "image": "../images/photo3.jpg",
    "description": `                Category: Photo
                 Flavours: "Chocolate","french chocolate"
                 Shape: Round`,
@@ -215,7 +215,7 @@ const Cakes=[
   "price": 700,
   "flavours": ["Chocolate","french chocolate"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/photo2.webp",
+   "image": "../images/photo2.jpg",
    "description": `                Category: Photo
                 Flavours: "Chocolate","french chocolate"
                 Shape: Rectangle`,
@@ -230,7 +230,7 @@ const Cakes=[
   "price": 950,
   "flavours": ["Chocolate","french chocolate","blueberry"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/anniversary3.webp",
+   "image": "../images/anniversary3.jpg",
    "description": `                Category: Anniversary
                 Flavours: "Chocolate","french chocolate","blueberry"
                 Shape: Round`,
@@ -245,7 +245,7 @@ const Cakes=[
   "price": 700,
   "flavours": ["Chocolate","french chocolate","blueberry"],
   "weight":[0.5,1,1.5,2,3,4,5,6,7,8,9,10],
-   "image": "../images/anniversary4.avif",
+   "image": "../images/redvelvet_anniversary.jfif.jpg",
    "description": `                Category: Anniversary
    Flavours: "Chocolate","french chocolate","blueberry"
    Shape: Round`,

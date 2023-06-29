@@ -5,11 +5,7 @@ const CartContext = createContext();
 
 const getLocalCartData = () => {
   let localCartData = localStorage.getItem("GoldenCart");
-  // if (localCartData === []) {
-  //   return [];
-  // } else {
-  //   return JSON.parse(localCartData);
-  // }
+  
   const parseData=JSON.parse(localCartData);
   if(!Array.isArray(parseData)) return [];
   return parseData;
@@ -26,11 +22,10 @@ const initialState = {
 const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const addToCart = (id, flavour, wt,amount, product) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, flavour,wt, amount, product } });
+  const addToCart = (id, flavour, wt,amount,bname, product,customize,detail) => {
+    dispatch({ type: "ADD_TO_CART", payload: { id, flavour,wt, amount,bname, product,customize,detail } });
   };
 
-  // increment and decrement the product
   const setDecrease = (id) => {
     dispatch({ type: "SET_DECREMENT", payload: id });
   };
