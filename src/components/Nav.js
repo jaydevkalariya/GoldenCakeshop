@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
+import axios from "axios";
+import { URI } from "../App";
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
-  const { logout,isAuthenticated,isAdmin } = useUserContext();
+  const { logout,isAuthenticated,isAdmin,user } = useUserContext();
+  const [cuser,setUser]=useState();
+  useEffect(() => {
+    // Replace 'your-backend-api-url' with the actual URL of your backend API
+    axios.post(`${URI}/users/getnamebyemail`,{email:user?.email})
+      .then((response) => {
+        console.log(response.data.userName)
+        setUser(response.data.userName)
+      })
+      .catch((error) => {
+        console.error('Error fetching user:', error);
+      });
+  }, [cuser]);
+
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -97,7 +112,7 @@ const Nav = () => {
       }
       .navbar-lists {
         width: 100vw;
-        height: 100vh;
+        height: 120vh;
         position: absolute;
         top: 0;
         left: 0;
@@ -144,6 +159,11 @@ const Nav = () => {
         padding: 0.8rem 1.4rem;
       }
     }
+    .profile{
+     display:flex;
+     flex-direction:column;
+     margin-top:12px;
+    }
   `;
 
   return (
@@ -151,6 +171,7 @@ const Nav = () => {
       <div className={menuIcon ? "navbar active" : "navbar"}>
         <ul className="navbar-lists">
         {isAuthenticated && isAdmin?
+        
         <li>
             <NavLink
               to="/admin"
@@ -168,6 +189,7 @@ const Nav = () => {
               Home
             </NavLink>
           </li>
+          
           <li>
             <NavLink
               to="/about"
@@ -200,6 +222,7 @@ const Nav = () => {
               Contact
             </NavLink>
           </li>
+         
           {!isAuthenticated?
           <>
           <li>
@@ -222,6 +245,16 @@ const Nav = () => {
           </li>
           </>
            :
+           <>
+           <li>
+           <NavLink
+             to="/yourOrder"
+             className="navbar-link "
+             onClick={() => setMenuIcon(false)}>
+             View Order
+           </NavLink>
+         </li>
+        
           <li>
             <NavLink
               to="/"
@@ -234,6 +267,7 @@ const Nav = () => {
               Logout
             </NavLink>
           </li>
+          </>
            }
          
           <li>
@@ -244,6 +278,20 @@ const Nav = () => {
               <span className="cart-total--item"> {total_item} </span>
             </NavLink>
           </li>
+          {isAuthenticated?
+          <li>
+           <NavLink
+             to="/yourOrder"
+             className="navbar-link "
+             onClick={() => setMenuIcon(false)}>
+              <div className="profile">
+              <img src="/images/profile.png" height="55" width="55" alt="" />
+            {cuser}
+            </div>
+           </NavLink>
+         </li>
+           :""}
+          
           
         </ul>
 

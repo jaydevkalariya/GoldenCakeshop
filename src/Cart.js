@@ -18,7 +18,8 @@ const Cart = () => {
   const placeOrder=()=>{
       if(isAuthenticated)
       {
-           navigate('/order');
+          // navigate('/order');
+          navigate('/shipping');
       }
       else{
           navigate("/login");
@@ -31,7 +32,7 @@ const Cart = () => {
       <EmptyDiv>
         <h4>Welcome {isAuthenticated? user?.email : " User, Login first"}</h4>
         <hr />
-        <h3>No Cart in Item </h3>
+        <h3>No Item In Cart </h3>
       </EmptyDiv>
     );
   }
@@ -87,6 +88,7 @@ const Cart = () => {
             </div>
           </div>
           <Button onClick={placeOrder}>Proceed to checkout</Button>
+          
         </div>
       </div>
     </Wrapper>

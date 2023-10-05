@@ -73,8 +73,8 @@ const AddToCart = ({ product }) => {
           setDecrease={setDecrease}
           setIncrease={setIncrease}
         />
-
-        <NavLink to="/cart" onClick={() => addToCart(product.id, flavour, wt, amount, bname, product, false, "")}>
+        
+        <NavLink to="/cart" onClick={() => addToCart(product._id, flavour, wt, amount, bname, product, false, "")}>
           <Button className="btn">Add To Cart</Button>
         </NavLink>
       </Wrapper>

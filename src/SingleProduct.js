@@ -21,7 +21,7 @@ const SingleProduct = () => {
   const { id } = useParams();
   let x = Math.random()
   const {
-    id: alias,
+    id: _id,
     name,
     price,
     description,

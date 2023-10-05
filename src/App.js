@@ -21,9 +21,12 @@ import {  useUserContext } from "./context/user_context";
 import CustomizeCake from "./customizeCake";
 import AdminPanel from "./adminpanel";
 import AddCake from "./addcake";
+import YourOrder from "./yourOrder";
+import ShippingAddressForm from "./shipping";
+import { ShippingProvider } from "./context/shipping_context";
 
- //export const URI="http://localhost:4000/api/v1";
-export const URI="https://goldencakeshop.onrender.com/api/v1";
+ export const URI="http://localhost:4000/api/v1";
+//export const URI="https://goldencakeshop.onrender.com/api/v1";
 const stripePromise = loadStripe('pk_test_51N6qNZSEnGA13Sm4NafrTQiwVDb6o1I3x7HTXpMl2kd5haOWHT6QVGZUgneEu0fnUt4RC3FXXS6XdNXXDLr7dOWi00QM7ZNwUt');
 
 const App = () => {
@@ -31,7 +34,7 @@ const App = () => {
    
   const theme = {
     colors: {
-      heading: "rgb(24 24 29)",
+      heading: "rgb(24 24 29)",   
       text: "rgba(29 ,29, 29, .8)",
       white: "#fff",
       black: " #212529",
@@ -59,6 +62,7 @@ const App = () => {
       
     <ThemeProvider theme={theme}>
     <ToastContainer/>
+    <ShippingProvider>
       <Router>
         <GlobalStyle />
         <Header />
@@ -78,11 +82,13 @@ const App = () => {
           <Route path="/order" element={ <Elements stripe={stripePromise}>
                                          {isAuthenticated? <Order />: <ErrorPage />}
                                          </Elements>} />:
- 
+          <Route path="/yourorder" element={<YourOrder />} />
+          <Route path="/shipping" element={<ShippingAddressForm />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
       </Router>
+      </ShippingProvider>
     </ThemeProvider>
     </>
   );

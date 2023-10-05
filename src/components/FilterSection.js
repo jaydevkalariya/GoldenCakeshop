@@ -7,7 +7,7 @@ import { useState,useEffect } from "react";
 
 const FilterSection = () => {
   const {
-    filters: { text, category, price, maxPrice, minPrice },
+    filters: { text, category, price,egg, maxPrice, minPrice },
         updateFilterValue,
         all_products,
         clearFilters,
@@ -89,6 +89,22 @@ const FilterSection = () => {
             })}
           </select>
 
+      </div>
+      {/* for egg */}
+      <div className="filter-category">
+      <h3>Egg:</h3>
+      <select
+            name="egg"
+            id="egg"
+            className="filter-flavour--select"
+            onClick={updateFilterValue}
+              onChange={updateFilterValue }
+              onBlur={updateFilterValue}
+              >
+                <option name="egg">all</option>
+            <option name="egg">Egg</option>
+            <option name="egg">Eggless</option>
+          </select>
       </div>
 
       <div className="filter_price">

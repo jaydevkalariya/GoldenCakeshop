@@ -28,6 +28,7 @@ const cartReducer = (state, action) => {
     } else {
       let cartProduct = {
         id: id + flavour + wt,
+        cakeid:id,
         name: product.name,
         flavour,
         wt,
@@ -35,7 +36,7 @@ const cartReducer = (state, action) => {
         bname,
         customize,
         detail,
-        isConfirmed:false,
+        isConfirmed:"processing",
         image: product.image,
         price: product.category!=="pestry"? product.price * wt: product.price,
         max: product.stock,

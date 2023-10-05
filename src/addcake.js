@@ -14,6 +14,7 @@ const AddCake = () => {
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [egg, setEgg] = useState('');
   const [featured, setFeatured] = useState(0);
   const [stars, setStars] = useState(0);
   const [reviews, setReviews] = useState([]);
@@ -57,13 +58,14 @@ const AddCake = () => {
 
   const handleSubmit =async (e) => {
     e.preventDefault();
-    
+    alert(egg)
     const newCake={
       name,
       price,
       flavours:flavors,
       weight:weights,
       image:images,
+      egg,
       description,
       category,
       featured,
@@ -116,6 +118,14 @@ const AddCake = () => {
         <label>
           Category:
           <input type="text" name="category" value={category} onChange={(e) => setCategory(e.target.value)} />
+        </label>
+        <label>
+          Egg:
+          {/* <input type="text" name="egg" value={egg} onChange={(e) => setEgg(e.target.value)} /> */}
+          <select name="" id="" onClick={(e) => setEgg(e.target.value)} onChange={(e) => setEgg(e.target.value)} onBlur={(e) => setEgg(e.target.value)}>
+            <option>Egg</option>
+            <option>Eggless</option>
+          </select>
         </label>
         <label>
           Description:
@@ -185,6 +195,7 @@ const Wrapper = styled.section`
     display: block;
   }
   
+  .cake-page select,
   .cake-page input[type="text"],
   .cake-page input[type="number"],
   .cake-page textarea {

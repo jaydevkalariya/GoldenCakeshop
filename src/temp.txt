@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -9,21 +9,30 @@ import { URI } from './App';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
+
 import 'react-datepicker/dist/react-datepicker.css';
+
 
 const Order = () => {
   const navigate = useNavigate();
+  
   const { cart, clearCart, total_price } = useCartContext();
-  const { address,date } = useShippingContext();
+  // const { address,date } = useShippingContext();
   const { user } = useUserContext();
   const stripe = useStripe();
   const elements = useElements();
   const [cardName, setCardName] = useState('');
   const [cardNumberError, setCardNumberError] = useState(null);
-  // const [address, setAddress] = useState('');
+   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState(total_price);
   const [selectedDateTime, setSelectedDateTime] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  
+//   useEffect(()=>{
+//     console.log(address,date)
+//     // setAddress(address);
+     
+// },[])
 
 
   const handleDateTimeChange = (date) => {
@@ -42,7 +51,7 @@ const Order = () => {
   };
 
   const handleAddressChange = (event) => {
-    // setAddress(event.target.value);
+    setAddress(event.target.value);
   };
 
   const handleAmountChange = (event) => {
@@ -52,7 +61,7 @@ const Order = () => {
   const handleSubmit = async (event) => {
    
     event.preventDefault();
-    
+    console.log(selectedDateTime)
     if (!stripe || !elements || cardNumberError) {
       return;
     }
@@ -79,7 +88,7 @@ const Order = () => {
         const response = await axios.post(`${URI}/orders/process-payment`, {
           paymentMethodId: paymentMethod.id,
           address,
-          time: date,
+          time:selectedDateTime ,
           amount: parseInt(amount + 50, 10),
           order: cart,
           user: user,
@@ -129,13 +138,13 @@ const Order = () => {
        
     }
   };
-  
+ 
   return (
     <Wrapper>
       <div className="payment-page">
 
         <h2>Pay now</h2>
-       
+        
         <form onSubmit={handleSubmit} className="payment-form">
           <div className="form-group">
             <label htmlFor="card-name">Cardholder Name</label>

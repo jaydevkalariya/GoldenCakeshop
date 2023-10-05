@@ -76,10 +76,9 @@ const filterReducer = (state, action) => {
       let { all_products } = state;
       let tempFilterProduct = [...all_products];
 
-      const { text, category, flavour, price } = state.filters;
+      const { text, category, flavour, price,egg } = state.filters;
       
       if (text) {
-       
         tempFilterProduct = tempFilterProduct.filter((curElem) => {
           return curElem.name.toLowerCase().includes(text.toLowerCase());
         });
@@ -95,6 +94,12 @@ const filterReducer = (state, action) => {
       if (flavour !=="all") {
         tempFilterProduct = tempFilterProduct.filter((curElem) =>
           (curElem.flavours+"").toLowerCase().includes(flavour.toLowerCase())
+        );
+      }
+      if (egg !=="all") {
+        // alert(egg)
+        tempFilterProduct = tempFilterProduct.filter((curElem) =>
+          curElem.egg.toLowerCase() === egg.toLowerCase() 
         );
       }
       if (price === 0) {
@@ -120,6 +125,7 @@ const filterReducer = (state, action) => {
           text: "",
           category: "all",
           flavour: "all",
+          egg:"all",
           maxPrice: state.filters.maxPrice,
           price: state.filters.maxPrice,
           minPrice: 0,

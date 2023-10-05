@@ -32,7 +32,7 @@ const CartProvider = ({ children }) => {
   const setIncrement = (id) => {
     dispatch({ type: "SET_INCREMENT", payload: id });
   };
-
+  
   const removeItem = (id) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
   };

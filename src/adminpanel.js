@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Orders from './components/Orders';
 import Cakes from './components/Cakes';
 import Users from './components/Users';
+import Delivery from './components/Delivery';
 const AdminPanel = () => {
 
   return (
@@ -19,6 +20,9 @@ const AdminPanel = () => {
   <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample2">
     Users
   </button>
+  <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample2">
+    Delivery
+  </button>
   </div>
 
 <div className="collapse" id="collapseExample" data-bs-parent="#myGroup">
@@ -29,6 +33,9 @@ const AdminPanel = () => {
    </div>
    <div className="collapse" id="collapseExample3" data-bs-parent="#myGroup">
    <Users/>
+   </div>
+   <div className="collapse" id="collapseExample4" data-bs-parent="#myGroup">
+   <Delivery/>
    </div>
   </div>
       </div>
@@ -100,5 +107,9 @@ const Wrapper = styled.section`
 
   .btn-primary {
     background-color: #ff187f;
+  }
+  .row{
+    height:100vh;
+    overflow-y:scroll;
   }
 `;
