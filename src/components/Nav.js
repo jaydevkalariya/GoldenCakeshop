@@ -285,7 +285,7 @@ const Nav = () => {
           {isAuthenticated?
           <li>
            <NavLink
-             to="/yourOrder"
+             to="#"
              className="navbar-link "
              onClick={() => setMenuIcon(false)}>
               <div className="profile">

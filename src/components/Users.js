@@ -60,6 +60,9 @@ const Wrapper = styled.section`
     width:80%;
     margin:auto;
 }
+td{
+  font-weight:normal;
+}
 
 .table{
     font-size:17px;
