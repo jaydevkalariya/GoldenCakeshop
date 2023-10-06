@@ -76,12 +76,12 @@ const CustomizeCake = () => {
         <input type="text" id="Flavour" name="Flavour" value={flavour} onChange={(e)=>setFlavour(e.target.value)}/>
       </div>
       <div className="form-group">
-        <label for="Weight">Weight:</label>
+        <label for="Weight">Weight(in kg) :</label>
         <input type="text" id="Weight" name="Weight" value={wt} onChange={(e)=>setWeight(e.target.value)}/>
       </div>
       </span>
       <div className="form-group">
-        <label for="Cake">Name on Cake: (if any)</label>
+        <label for="Cake">Name on Cake(if any) :</label>
         <input type="text" id="bname" name="bname" value={bname} onChange={(e)=>setBname(e.target.value)}/>
       </div>
       <div className="form-group">

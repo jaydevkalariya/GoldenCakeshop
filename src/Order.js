@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import CheckoutSteps from "./components/checkoutstep.js"
+import { Button } from "./styles/Button";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -121,7 +123,7 @@ const Order = () => {
         toast.error(error);
       }
       finally{
-        // console.log("Hello from Order.js page");
+        
         setIsButtonDisabled(false);
       }
      
@@ -132,6 +134,8 @@ const Order = () => {
   
   return (
     <Wrapper>
+       <div className="main">
+     <div className="checkoutstep"><CheckoutSteps activeStep={2}/></div> 
       <div className="payment-page">
 
         <h2>Pay now</h2>
@@ -172,17 +176,10 @@ const Order = () => {
               value={address}
               onChange={handleAddressChange}
               required
+              disabled
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="address">Time & date</label>
-            <DatePicker
-              selected={selectedDateTime}
-              onChange={handleDateTimeChange}
-              showTimeSelect
-              dateFormat="Pp"
-            />
-          </div>
+         
 
           <div className="form-group">
             <label htmlFor="amount">Amount</label>
@@ -202,6 +199,7 @@ const Order = () => {
           </button>
         </form>
       </div>
+      </div>
     </Wrapper>
   );
 };
@@ -211,12 +209,22 @@ export default Order;
 
 
 const Wrapper = styled.section`
+.main{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.checkoutstep{
+  margin-top:4rem;
+ width:80vw;
+}
 .payment-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
+    width:100%;
     padding: 20px;
    
   }
@@ -248,7 +256,7 @@ const Wrapper = styled.section`
   
   button {
     padding: 10px;
-    background-color: #007bff;
+    background-color:#ff187f;
     color: #fff;
     border: none;
     cursor: pointer;

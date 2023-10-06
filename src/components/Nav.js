@@ -22,7 +22,7 @@ const Nav = () => {
       .catch((error) => {
         console.error('Error fetching user:', error);
       });
-  }, [cuser]);
+  });
 
   const Nav = styled.nav`
     .navbar-lists {
@@ -160,9 +160,13 @@ const Nav = () => {
       }
     }
     .profile{
-     display:flex;
+      display:flex;
      flex-direction:column;
-     margin-top:12px;
+      margin-top:20px;
+     align-items:center;
+     justify-content:center;
+     
+    
     }
   `;
 
@@ -285,8 +289,9 @@ const Nav = () => {
              className="navbar-link "
              onClick={() => setMenuIcon(false)}>
               <div className="profile">
-              <img src="/images/profile.png" height="55" width="55" alt="" />
-            {cuser}
+
+              <div><img src="/images/profile.png" height="40" width="40" alt="" /></div>
+            <div>{cuser}</div>
             </div>
            </NavLink>
          </li>

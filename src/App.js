@@ -24,6 +24,7 @@ import AddCake from "./addcake";
 import YourOrder from "./yourOrder";
 import ShippingAddressForm from "./shipping";
 import { ShippingProvider } from "./context/shipping_context";
+import ConfirmOrder from "./confirmOrder";
 
  export const URI="http://localhost:4000/api/v1";
 //export const URI="https://goldencakeshop.onrender.com/api/v1";
@@ -84,6 +85,7 @@ const App = () => {
                                          </Elements>} />:
           <Route path="/yourorder" element={<YourOrder />} />
           <Route path="/shipping" element={<ShippingAddressForm />} />
+          <Route path="/confirmOrder" element={<ConfirmOrder />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

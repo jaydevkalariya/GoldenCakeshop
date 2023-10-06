@@ -79,10 +79,10 @@ const SingleProduct = () => {
             <p><Star stars={stars} /></p>
             <p className="product-data-price">
 
-              Price: {(Math.round(price + ((price * x * (9)) / 100))) - ((Math.round(price + ((price * x * (9)) / 100))) % 10)}
+              Price: ₹ {(Math.round(price + ((price * x * (9)) / 100))) - ((Math.round(price + ((price * x * (9)) / 100))) % 10)} 
             </p>
             <p className="product-data-price product-data-real-price">
-              Deal of the Day: {price}
+              Deal of the Day: ₹ {price} 
             </p>
             <p style={{ fontWeight: "bold" }}> Product Highlights:
               <pre style={{ fontFamily: "sans-serif", fontWeight: "normal" }} >{description}</pre>
