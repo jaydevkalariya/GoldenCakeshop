@@ -94,6 +94,7 @@
           <>
            <Wrapper>
             <h1>View Orders</h1>
+            <button className="btn btn-success" onClick={getInvoice}>Generate Invoice</button>
             <OrdersList>
             {orders.map((o, orderIndex) => (
         <OrderItem key={orderIndex}>

@@ -20,6 +20,17 @@ function YourOrder() {
       });
   }, [user]);
 
+  const cancelOrder=(orderId)=>{
+    console.log(orderId, " ",user.email)
+    axios.post(`${URI}/orders/cancelOrders`, { email: user?.email, orderId })
+    .then((response) => {
+      // Sort orders by created_at date in descending order
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error in Canceling orders:', error);
+    });
+  }
   // Helper function to format the date for display
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString();
@@ -33,6 +44,7 @@ function YourOrder() {
         <OrderItem key={orderIndex}>
           <h2>Order {orderIndex + 1}</h2>
           <OrderTime className="bold">Placed at: {formatDate(order.created_at)}</OrderTime>
+          <button className="bt" onClick={()=>cancelOrder(order.id)}>Cancel Order</button>
           
           {order.order.map((item, itemIndex) => (
             <Item key={itemIndex}>
@@ -77,6 +89,12 @@ const Wrapper = styled.div`
   background-color: #ff187f;
   padding: 20px;
   text-align: center;
+  .bt{
+    background-color:red;
+    color:white;
+    width:50%;
+
+  }
   h1 {
     color: white;
     margin-bottom: 20px;
@@ -94,6 +112,7 @@ const Wrapper = styled.div`
   p{
     font-size:20px;
   }
+  
 `;
 
 const OrdersList = styled.ul`
